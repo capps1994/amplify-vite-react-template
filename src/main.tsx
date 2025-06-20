@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import "./index.css";
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from "aws-amplify";
-import { parseAmplifyConfig } from "aws-amplify/utils";
+// import { parseAmplifyConfig } from "aws-amplify/utils";
 import outputs from "../amplify_outputs.json";
 
 // const amplifyConfig = parseAmplifyConfig(outputs);
