@@ -7,8 +7,12 @@ import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from "aws-amplify";
 import { parseAmplifyConfig } from "aws-amplify/utils";
 import outputs from "../amplify_outputs.json";
+import { fetchAuthSession } from "aws-amplify/auth";
 
 const amplifyConfig = parseAmplifyConfig(outputs);
+
+const session = await fetchAuthSession();
+const token = session.tokens?.idToken
 
 Amplify.configure(
   {
@@ -21,6 +25,9 @@ Amplify.configure(
   {
     API: {
       REST: {
+        headers: async () => {
+          return {Authorization: `Bearer ${token}`}; // Use the token from the session
+        },
         retryStrategy: {
           strategy: 'no-retry' // Overrides default retry strategy
         },
