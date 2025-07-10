@@ -6,7 +6,7 @@ import { generateClient } from "aws-amplify/data";
 import outputs from "../amplify_outputs.json";
 
 const client = generateClient<Schema>();
-const session = await fetchAuthSession();
+
 
 function App() {
   const { user, signOut } = useAuthenticator();
@@ -29,11 +29,7 @@ function App() {
 
   async function hitApi() {
     try {
-        // Print all localStorage keys
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        console.log("localStorage key:", key);
-      }
+      const session = await fetchAuthSession();
 
       const response = await fetch(outputs.custom.API.myHttpApi.endpoint + "cognito-auth-path", {
         method: "GET",
